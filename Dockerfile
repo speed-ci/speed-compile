@@ -1,0 +1,1 @@
+FROM docker-artifactory-poc.sln.nc/speed/ci-script-base
