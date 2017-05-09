@@ -3,7 +3,7 @@ set -e
 
 ARGS=${ARGS:-""}
 DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
-IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:build
+IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
 
 check_docker_env () {
     if [[ ! -f $DOCKERFILE ]];then
@@ -37,6 +37,6 @@ check_build_env
 
 printstep "Extraction du code compilé"
 rm -rf $BUILD_DIR
-docker create --name $CI_PROJECT_NAME-build $IMAGE
-docker cp $CI_PROJECT_NAME-build:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
-docker rm -f $CI_PROJECT_NAME-build
+docker create --name $PROJECT_NAME-build $IMAGE
+docker cp $PROJECT_NAME-build:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
+docker rm -f $PROJECT_NAME-build
