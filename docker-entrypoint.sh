@@ -9,7 +9,7 @@ check_docker_env () {
         exit 1
     fi
     DOCKER_SOCKET="/var/run/docker.sock"
-    if [[ ! -f $DOCKER_SOCKET ]];then
+    if [[ ! -e $DOCKER_SOCKET ]];then
         printerror "La socket docker $DOCKER_SOCKET n’est pas présente, elle doit être montée au docker run"
         exit 1
     fi    
