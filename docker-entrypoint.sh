@@ -3,18 +3,6 @@ set -e
 
 source /init.sh
 
-check_docker_env () {
-    if [[ ! -f $DOCKERFILE ]];then
-        printerror "Le fichier $DOCKERFILE n’est pas présent, il doit se trouver à la racine du projet"
-        exit 1
-    fi
-    DOCKER_SOCKET="/var/run/docker.sock"
-    if [[ ! -e $DOCKER_SOCKET ]];then
-        printerror "La socket docker $DOCKER_SOCKET n’est pas présente, elle doit être montée au docker run"
-        exit 1
-    fi    
-}
-
 check_build_env () {
     if [[ -z $BUILD_DIR ]];then
         printerror "La variable BUILD_DIR n'est pas présente, elle doit être précisée dans le fichier $DOCKERFILE (ex: dist pour js, target pour java)"
