@@ -3,10 +3,6 @@ set -e
 
 source /init.sh
 
-ARGS=${ARGS:-""}
-DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
-IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
-
 check_docker_env () {
     if [[ ! -f $DOCKERFILE ]];then
         printerror "Le fichier $DOCKERFILE n’est pas présent, il doit se trouver à la racine du projet"
@@ -27,7 +23,11 @@ check_build_env () {
 
 printmainstep "Compilation de l'application par Docker Builder Pattern"
 printstep "Vérification des paramètres d'entrée"
+init_env
 check_docker_env
+ARGS=${ARGS:-""}
+DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
+IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
 
 printstep "Compilation du code source"
 docker build $ARGS --build-arg http_proxy=$PROXY -f $DOCKERFILE -t $IMAGE .
