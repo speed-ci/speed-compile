@@ -8,6 +8,11 @@ check_docker_env () {
         printerror "Le fichier $DOCKERFILE n’est pas présent, il doit se trouver à la racine du projet"
         exit 1
     fi
+    DOCKER_SOCKET="/var/run/docker.sock"
+    if [[ ! -f $DOCKER_SOCKET ]];then
+        printerror "La socket docker $DOCKER_SOCKET n’est pas présente, elle doit être montée au docker run"
+        exit 1
+    fi    
 }
 
 check_build_env () {
