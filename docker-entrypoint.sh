@@ -24,10 +24,12 @@ check_build_env () {
 printmainstep "Compilation de l'application par Docker Builder Pattern"
 printstep "Vérification des paramètres d'entrée"
 init_env
-check_docker_env
+
 ARGS=${ARGS:-""}
 DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
 IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
+
+check_docker_env
 
 printstep "Compilation du code source"
 docker build $ARGS --build-arg http_proxy=$PROXY -f $DOCKERFILE -t $IMAGE .
