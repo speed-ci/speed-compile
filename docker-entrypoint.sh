@@ -19,6 +19,7 @@ printstep "Vérification des paramètres d'entrée"
 init_env
 
 ARGS=${ARGS:-""}
+DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
 IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
 
 check_docker_env
