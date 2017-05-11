@@ -26,11 +26,19 @@ printinfo "ARGS       : $ARGS"
 printinfo "DOCKERFILE : $DOCKERFILE"
 printinfo "IMAGE      : $IMAGE"
 printinfo "PROXY      : $PROXY"
+printinfo "NO_PROXY   : $NO_PROXY
 
 check_docker_env
 
 printstep "Compilation du code source"
-docker build $ARGS --build-arg http_proxy=$PROXY -f $DOCKERFILE -t $IMAGE .
+docker build $ARGS  \
+             --build-arg http_proxy=$PROXY  \
+             --build-arg https_proxy=$PROXY \
+             --build-arg no_proxy=$NO_PROXY \
+             --build-arg HTTP_PROXY=$PROXY  \
+             --build-arg HTTPS_PROXY=$PROXY \
+             --build-arg NO_PROXY=$NO_PROXY \
+       -f $DOCKERFILE -t $IMAGE .
 
 printstep "Vérification des métadonnées du Dockerfile builder"
 BUILD_DIR=${BUILD_DIR:-`docker inspect --format '{{ .Config.Env }}' $IMAGE |  tr ' ' '\n' | tr -d ']' | grep BUILD_DIR | sed 's/^.*=//'`}
