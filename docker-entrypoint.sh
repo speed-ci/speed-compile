@@ -3,6 +3,25 @@ set -e
 
 source /init.sh
 
+function help () {
+# Using a here doc with standard out.
+cat <<-END
+Usage:
+------
+   -h | --help
+     Display this help
+END
+}
+
+while [ -n "$1" ]; do
+    case "$1" in
+        -h | --help)
+            help
+            exit
+            ;;
+    esac 
+done
+
 check_build_env () {
     if [[ -z $BUILD_DIR ]];then
         printerror "La variable BUILD_DIR n'est pas présente, elle doit être précisée dans le fichier $DOCKERFILE (ex: dist pour js, target pour java)"
