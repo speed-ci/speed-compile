@@ -26,7 +26,7 @@ printinfo "ARGS       : $ARGS"
 printinfo "DOCKERFILE : $DOCKERFILE"
 printinfo "IMAGE      : $IMAGE"
 printinfo "PROXY      : $PROXY"
-printinfo "NO_PROXY   : $NO_PROXY
+printinfo "NO_PROXY   : $NO_PROXY"
 
 check_docker_env
 
