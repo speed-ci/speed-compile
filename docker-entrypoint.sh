@@ -5,8 +5,9 @@ source /init.sh
 
 function help () {
 # Using a here doc with standard out.
+BOLD=$(tput bold)
 cat <<-END
-Usage:
+${BOLD}Usage:
 ------
    -h | --help
      Display this help
