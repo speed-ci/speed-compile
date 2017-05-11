@@ -22,6 +22,11 @@ ARGS=${ARGS:-""}
 DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
 IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
 
+printinfo "ARGS       : $ARGS"
+printinfo "DOCKERFILE : $DOCKERFILE"
+printinfo "IMAGE      : $IMAGE"
+printinfo "PROXY      : $PROXY"
+
 check_docker_env
 
 printstep "Compilation du code source"
