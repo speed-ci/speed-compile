@@ -62,7 +62,7 @@ docker build $ARGS  \
 NEW_IMAGE_ID=$(docker images -q $IMAGE)
 
 if [[ "$OLD_IMAGE_ID" != "$NEW_IMAGE_ID" ]]; then
-    printstep "Suppression de l'image Docker précédente du cache local"
+    printstep "Suppression de l'image Docker builder précédente du cache local"
     if [[ -n "$OLD_IMAGE_ID" ]]; then 
         NB_DEPENDENT_CHILD_IMAGES=`docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=$OLD_IMAGE_ID -q) | wc -l`
         if [[ $NB_DEPENDENT_CHILD_IMAGES -ne 0 ]]; then docker rmi $OLD_IMAGE_ID; fi
