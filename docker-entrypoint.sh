@@ -39,7 +39,7 @@ init_env
 
 ARGS=${ARGS:-""}
 DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
-IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:build
+IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:builder
 
 printinfo "ARGS       : $ARGS"
 printinfo "DOCKERFILE : $DOCKERFILE"
@@ -66,6 +66,6 @@ check_build_env
 
 printstep "Extraction du code compilé"
 rm -rf $BUILD_DIR
-docker create --name $PROJECT_NAME-build $IMAGE
-docker cp $PROJECT_NAME-build:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
-docker rm -f $PROJECT_NAME-build
+docker create --name $PROJECT_NAME-builder $IMAGE
+docker cp $PROJECT_NAME-builder:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
+docker rm -f $PROJECT_NAME-builder
