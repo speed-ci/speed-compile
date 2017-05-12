@@ -50,6 +50,7 @@ printinfo "NO_PROXY   : $NO_PROXY"
 check_docker_env
 
 printstep "Compilation du code source"
+OLD_IMAGE_ID=$(docker images -q $IMAGE)
 docker build $ARGS  \
              --build-arg http_proxy=$PROXY  \
              --build-arg https_proxy=$PROXY \
@@ -58,6 +59,15 @@ docker build $ARGS  \
              --build-arg HTTPS_PROXY=$PROXY \
              --build-arg NO_PROXY=$NO_PROXY \
        -f $DOCKERFILE -t $IMAGE .
+NEW_IMAGE_ID=$(docker images -q $IMAGE)
+
+if [[ "$OLD_IMAGE_ID" != "$NEW_IMAGE_ID" ]]; then
+    printstep "Suppression de l'image Docker précédente du cache local"
+    if [[ -n "$OLD_IMAGE_ID" ]]; then 
+        NB_DEPENDENT_CHILD_IMAGES=`docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=$OLD_IMAGE_ID -q) | wc -l`
+        if [[ $NB_DEPENDENT_CHILD_IMAGES -ne 0 ]]; then docker rmi $OLD_IMAGE_ID; fi
+    fi
+fi
 
 printstep "Vérification des métadonnées du Dockerfile builder"
 BUILD_DIR=${BUILD_DIR:-`docker inspect --format '{{ .Config.Env }}' $IMAGE |  tr ' ' '\n' | tr -d ']' | grep BUILD_DIR | sed 's/^.*=//'`}
