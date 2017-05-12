@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Before source init"
 source /init.sh
-echo "After source init"
 
 function help () {
 # Using a here doc with standard out.
