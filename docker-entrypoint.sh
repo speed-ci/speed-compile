@@ -12,7 +12,7 @@ Usage: docker run [OPTIONS] docker-artifactory.sln.nc/speed/speed-compile
 Compiler le code source de l'application du répertoire courant
 Le builder utilisé doit être défini dans un fichier Dockerfile.build à la racine du projet
 Les variables suivantes doivent être renseignée dans le fichier Dockerfile.build:
-    - WORKING_DIR   : le répertoire de courant du builder
+    - WORKING_DIR   : le répertoire de travail du builder
     - BUILD_DIR     : le répertoire de destination du code compilé 
 
 Options:
