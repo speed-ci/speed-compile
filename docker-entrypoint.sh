@@ -6,16 +6,25 @@ source /init.sh
 function help () {
 # Using a here doc with standard out.
 cat <<-END
-Usage:
-------
-   -h | --help
-     Display this help
+
+Usage: docker run [OPTIONS] docker-artifactory.sln.nc/speed/speed-compile
+
+Compiler le code source de l'application du répertoire courant
+Le builder utilisé doit être défini dans un fichier Dockerfile.build à la racine du projet
+
+Options:
+  -e ARTIFACTORY_URL=string                         URL d'Artifactory (ex: https://artifactory.sln.nc)
+  -e ARTIFACTORY_USER=string                        Username d'accès à Artifactory (ex: prenom.nom)
+  -e ARTIFACTORY_PASSWORD=string                    Mot de passe d'accès à Artifactory
+  -env-file ~/speed.env                             Fichier contenant les variables d'environnement précédentes
+  -v $(pwd):/srv/speed                              Bind mount du répertoire racine de l'application à compiler
+  -v /var/run/docker.sock:/var/run/docker.sock      Bind mount de la socket docker pour le lancement de commande docker lors de la compilation
 END
 }
 
 while [ -n "$1" ]; do
     case "$1" in
-        -h | --help)
+        -h | --help | help)
             help
             exit
             ;;
