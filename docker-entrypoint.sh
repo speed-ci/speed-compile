@@ -20,7 +20,7 @@ Options:
     -e ARTIFACTORY_USER=string                        Username d'accès à Artifactory (ex: prenom.nom)
     -e ARTIFACTORY_PASSWORD=string                    Mot de passe d'accès à Artifactory
     -env-file ~/speed.env                             Fichier contenant les variables d'environnement précédentes
-    -v $(pwd):/srv/speed                            Bind mount du répertoire racine de l'application à compiler
+    -v $(pwd):/srv/speed                        Bind mount du répertoire racine de l'application à compiler
     -v /var/run/docker.sock:/var/run/docker.sock      Bind mount de la socket docker pour le lancement de commande docker lors de la compilation
 END
 }
