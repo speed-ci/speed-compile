@@ -14,8 +14,8 @@ Le builder utilisé doit être défini dans un fichier Dockerfile.build à la ra
 Les variables suivantes doivent être renseignée dans le fichier Dockerfile.build:
     - WORKING_DIR   : le répertoire de travail du builder
     - BUILD_DIR     : le répertoire de destination du code compilé 
-L'action de compiler consiste à prendre du code source en entrée et génrer une image contenant l'environnement de compilation et le code compilé.
-Le répertoire du code compilé de l'image du builder est enseuite copier dans le répertoire BUILD_DIR depuis la racine du projet
+L'action de compiler consiste à prendre du code source en entrée et générer une image contenant l'environnement de compilation et le code compilé en sortie.
+Le répertoire du code compilé de l'image du builder est ensuite copiée dans le répertoire BUILD_DIR à la racine du projet
 
 Options:
     -e ARTIFACTORY_URL=string                         URL d'Artifactory (ex: https://artifactory.sln.nc)
