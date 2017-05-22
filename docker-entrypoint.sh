@@ -62,7 +62,6 @@ printinfo "IMAGE      : $IMAGE"
 printinfo "PROXY      : $PROXY"
 printinfo "NO_PROXY   : $NO_PROXY"
 printinfo "NO_CACHE   : $NO_CACHE"
-printinfo "ARGS       : $ARGS"
 
 check_docker_env
 
