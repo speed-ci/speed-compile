@@ -55,15 +55,14 @@ init_env
 DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
 IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:builder
 NO_CACHE=${NO_CACHE:-"false"}
-printinfo "NO_CACHE   : $NO_CACHE"
+if [[ "$NO_CACHE" == "true" ]]; then ARGS="--no-cache"; fi
 
 printinfo "DOCKERFILE : $DOCKERFILE"
 printinfo "IMAGE      : $IMAGE"
 printinfo "PROXY      : $PROXY"
 printinfo "NO_PROXY   : $NO_PROXY"
 printinfo "NO_CACHE   : $NO_CACHE"
-
-if [[ "$NO_CACHE" == "true" ]]; then ARGS="--no-cache"; fi
+printinfo "ARGS       : $ARGS"
 
 check_docker_env
 
