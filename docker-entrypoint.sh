@@ -66,6 +66,7 @@ printinfo "NO_CACHE   : $NO_CACHE"
 check_docker_env
 
 printstep "Compilation du code source"
+docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWORD $ARTIFACTORY_DOCKER_REGISTRY
 OLD_IMAGE_ID=$(docker images -q $IMAGE)
 docker build $ARGS  \
              --build-arg http_proxy=$PROXY  \
