@@ -83,7 +83,7 @@ NEW_IMAGE_ID=$(docker images -q $IMAGE)
 
 if [[ "$OLD_IMAGE_ID" != "$NEW_IMAGE_ID" ]]; then
     printstep "Suppression de l'image Docker builder précédente du cache local"
-    if [[ -n "$OLD_IMAGE_ID" ]]; then docker rmi $OLD_IMAGE_ID || true; fi
+    if [[ -n "$OLD_IMAGE_ID" ]]; then docker rmi -f $OLD_IMAGE_ID || true; fi
 fi
 
 printstep "Vérification des métadonnées du Dockerfile builder"
