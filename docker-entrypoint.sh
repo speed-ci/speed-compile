@@ -97,4 +97,4 @@ printinfo "CONTAINER_NAME   : $CONTAINER_NAME"
 rm -rf $BUILD_DIR
 docker create --name $CONTAINER_NAME $IMAGE
 docker cp $CONTAINER_NAME:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
-docker rm -f $CONTAINER_NAME || true
+docker rm $CONTAINER_NAME || true
