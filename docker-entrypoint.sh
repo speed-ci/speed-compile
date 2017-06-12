@@ -92,7 +92,9 @@ WORKING_DIR=`docker inspect --format '{{ .Config.WorkingDir }}' $IMAGE`
 check_build_env
 
 printstep "Extraction du code compilé"
+CONTAINER_NAME=$PROJECT_NAMESPACE-$PROJECT_NAME-builder
+printinfo "CONTAINER_NAME   : $CONTAINER_NAME"
 rm -rf $BUILD_DIR
-docker create --name $PROJECT_NAME-builder $IMAGE
-docker cp $PROJECT_NAME-builder:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
-docker rm -f $PROJECT_NAME-builder
+docker create --name $CONTAINER_NAME $IMAGE
+docker cp $CONTAINER_NAME:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
+docker rm -f $CONTAINER_NAME
