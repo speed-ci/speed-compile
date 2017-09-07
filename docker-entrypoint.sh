@@ -94,6 +94,7 @@ check_build_env
 printstep "Extraction du code compilé"
 CONTAINER_NAME=$PROJECT_NAMESPACE-$PROJECT_NAME-builder
 printinfo "CONTAINER_NAME   : $CONTAINER_NAME"
+printinfo "BUILD_DIR        : $BUILD_DIR"
 rm -rf $BUILD_DIR
 docker rm -f $CONTAINER_NAME || true
 docker create --name $CONTAINER_NAME $IMAGE
