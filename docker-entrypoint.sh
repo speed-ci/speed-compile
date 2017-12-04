@@ -21,9 +21,10 @@ Options:
     -e ARTIFACTORY_URL=string                         URL d'Artifactory (ex: https://artifactory.sln.nc)
     -e ARTIFACTORY_USER=string                        Username d'accès à Artifactory (ex: prenom.nom)
     -e ARTIFACTORY_PASSWORD=string                    Mot de passe d'accès à Artifactory
+    -e PUBLISH_ARTIFACT=boolean                       Activer la publication de l'artefact généré sur Artifactory (default: false)    
     -e NO_CACHE=boolean                               Désactiver l'utilisation du cache lors du docker build (default: false)
-    --env-file ~/speed.env                             Fichier contenant les variables d'environnement précédentes
-    -v \$(pwd):/srv/speed                              Bind mount du répertoire racine de l'application à compiler
+    --env-file ~/speed.env                            Fichier contenant les variables d'environnement précédentes
+    -v \$(pwd):/srv/speed                             Bind mount du répertoire racine de l'application à compiler
     -v /var/run/docker.sock:/var/run/docker.sock      Bind mount de la socket docker pour le lancement de commandes docker lors de la compilation
 END
 }
@@ -54,14 +55,16 @@ init_env
 
 DOCKERFILE=${DOCKERFILE:-"Dockerfile.build"}
 IMAGE=$ARTIFACTORY_DOCKER_REGISTRY/$PROJECT_NAMESPACE/$PROJECT_NAME:builder
+PUBLISH_ARTIFACT=${PUBLISH_ARTIFACT:-"false"}
 NO_CACHE=${NO_CACHE:-"false"}
 if [[ "$NO_CACHE" == "true" ]]; then ARGS="--no-cache"; fi
 
-printinfo "DOCKERFILE : $DOCKERFILE"
-printinfo "IMAGE      : $IMAGE"
-printinfo "PROXY      : $PROXY"
-printinfo "NO_PROXY   : $NO_PROXY"
-printinfo "NO_CACHE   : $NO_CACHE"
+printinfo "DOCKERFILE       : $DOCKERFILE"
+printinfo "IMAGE            : $IMAGE"
+printinfo "PROXY            : $PROXY"
+printinfo "NO_PROXY         : $NO_PROXY"
+printinfo "PUBLISH_ARTIFACT : PUBLISH_ARTIFACT"
+printinfo "NO_CACHE         : $NO_CACHE"
 
 check_docker_env
 
@@ -78,6 +81,7 @@ docker build $ARGS  \
              --build-arg ARTIFACTORY_URL=$ARTIFACTORY_URL \
              --build-arg ARTIFACTORY_USER=$ARTIFACTORY_USER \
              --build-arg ARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD \
+             --build-arg PUBLISH_ARTIFACT=$PUBLISH_ARTIFACT \
        -f $DOCKERFILE -t $IMAGE .
 NEW_IMAGE_ID=$(docker images -q $IMAGE)
 
