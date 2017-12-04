@@ -63,7 +63,7 @@ printinfo "DOCKERFILE       : $DOCKERFILE"
 printinfo "IMAGE            : $IMAGE"
 printinfo "PROXY            : $PROXY"
 printinfo "NO_PROXY         : $NO_PROXY"
-printinfo "PUBLISH_ARTIFACT : PUBLISH_ARTIFACT"
+printinfo "PUBLISH_ARTIFACT : $PUBLISH_ARTIFACT"
 printinfo "NO_CACHE         : $NO_CACHE"
 
 check_docker_env
