@@ -24,7 +24,7 @@ Options:
     -e PUBLISH_ARTIFACT=boolean                       Activer la publication de l'artefact généré sur Artifactory (default: false)    
     -e NO_CACHE=boolean                               Désactiver l'utilisation du cache lors du docker build (default: false)
     --env-file ~/speed.env                            Fichier contenant les variables d'environnement précédentes
-    -v \$(pwd):/srv/speed                             Bind mount du répertoire racine de l'application à compiler
+    -v \$(pwd):/srv/speed                              Bind mount du répertoire racine de l'application à compiler
     -v /var/run/docker.sock:/var/run/docker.sock      Bind mount de la socket docker pour le lancement de commandes docker lors de la compilation
 END
 }
