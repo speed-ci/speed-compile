@@ -105,5 +105,5 @@ printinfo "BUILD_DIR        : $BUILD_DIR"
 rm -rf $BUILD_DIR
 docker rm -f $CONTAINER_NAME || true
 docker create --name $CONTAINER_NAME $IMAGE
-docker cp $CONTAINER_NAME:$WORKING_DIR/$BUILD_DIR/ ./$BUILD_DIR/
+docker cp $CONTAINER_NAME:$WORKING_DIR/$BUILD_DIR ./$BUILD_DIR
 docker rm -f $CONTAINER_NAME || true
