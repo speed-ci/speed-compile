@@ -68,6 +68,7 @@ printinfo "PROXY            : $PROXY"
 printinfo "NO_PROXY         : $NO_PROXY"
 printinfo "PUBLISH_ARTIFACT : $PUBLISH_ARTIFACT"
 printinfo "NO_CACHE         : $NO_CACHE"
+printinfo "BUILDER_ARGS     : $BUILDER_ARGS"
 
 check_docker_env
 
@@ -85,6 +86,7 @@ docker build $ARGS  \
              --build-arg ARTIFACTORY_USER=$ARTIFACTORY_USER \
              --build-arg ARTIFACTORY_PASSWORD=$ARTIFACTORY_PASSWORD \
              --build-arg PUBLISH_ARTIFACT=$PUBLISH_ARTIFACT \
+             --build-arg BUILDER_ARGS=$BUILDER_ARGS \
        -f $DOCKERFILE -t $IMAGE .
 NEW_IMAGE_ID=$(docker images -q $IMAGE)
 
